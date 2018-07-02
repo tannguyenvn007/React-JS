@@ -8,8 +8,13 @@ class App extends Component {
     constructor(props){
         super(props);
         this.state =  {
-        task: [], // id, name, status
-        isDisplayForm: false
+            task: [], // id, name, status
+            isDisplayForm: false,
+            taskEditing: null,
+            filter: {
+                name: '',
+                status: -1
+            }
         }
     }
     
@@ -24,30 +29,30 @@ class App extends Component {
         }
     }
   
-    onGenerateData = () => {
-        var tasks = [
-            {
-                id: this.generateID(),
-                name:' Học lập trình',
-                status :true
-            },
-            {
-                id: this.generateID(),
-                name:' Đi bơi',
-                status: false
-            },
-            {
-                id: this.generateID(),
-                name:'Ngủ',
-                status:true
-            }
-        ]
-        // this.setState ({
-        //     task: tasks
-        // });
-        localStorage.setItem('task', JSON.stringify(tasks));//JSON.stringify: chuyển data từ object sang String
+    // onGenerateData = () => {
+    //     var tasks = [
+    //         {
+    //             id: this.generateID(),
+    //             name:' Học lập trình',
+    //             status :true
+    //         },
+    //         {
+    //             id: this.generateID(),
+    //             name:' Đi bơi',
+    //             status: false
+    //         },
+    //         {
+    //             id: this.generateID(),
+    //             name:'Ngủ',
+    //             status:true
+    //         }
+    //     ]
+    //     this.setState ({
+    //         task: tasks
+    //     });
+    //     localStorage.setItem('task', JSON.stringify(tasks));//JSON.stringify: chuyển data từ object sang String
         
-    }
+    // }
     
 
     s4(){
@@ -58,28 +63,119 @@ class App extends Component {
     }
 
     onToggleForm = () => {
-        this.setState({
-            isDisplayForm: !this.state.isDisplayForm //nguoc lai
-        })
+        if (this.state.isDisplayForm && this.state.taskEditing !==null) {
+            this.setState({
+                isDisplayForm: true,
+                taskEditing: null
+            });
+        } else {
+            this.setState({
+                isDisplayForm: !this.state.isDisplayForm, //nguoc lai
+                taskEditing: null
+            });
+        }
+        
     }
     onCloseForm = () => {
         this.setState({
             isDisplayForm: false
         })
     }
+    onShowForm = () => {
+        this.setState({
+            isDisplayForm: true
+        })
+    }
     onSubmit = (data) => {
         var {task} = this.state;
-        data.id = this.generateID();
-        task.push(data);
+        if(data.id === ''){
+            data.id = this.generateID();
+            task.push(data);
+        }else{
+            var index = this.findIndex(data.id);
+            task[index] = data;
+        }
         
-        localStorage.setItem('task', JSON.stringify(task));
         this.setState({
-            task:task
+            task:task,
+            taskEditing: null
         });
+        localStorage.setItem('task', JSON.stringify(task));
+    }
+    onUpdateStatus = (id) => {
+        var {task} = this.state;
+        var index = this.findIndex(id);
+        if(index !== -1){
+            task[index].status = !task[index].status;
+            this.setState({
+                task:task
+            })
+        }
+        localStorage.setItem('task', JSON.stringify(task));
+        
+    }
+    findIndex = (id) => {
+        var {task} = this.state;
+        var result = -1;
+        task.forEach((task,index) => {
+            if(task.id === id){
+                result = index;
+            }
+        })
+        return result;
+    }
+    onDelete = (id) => {
+        var {task} = this.state;
+        var index = this.findIndex(id);
+        if(index !== -1){
+            task.splice(index,1);// xoa data tai vi tri index va xoa 1 data
+            this.setState({
+                task:task
+            })
+        }
+        localStorage.setItem('task', JSON.stringify(task));
+        this.onCloseForm();
+    }
+    onUpdate = (id) => { //nhan id from con tra ve
+        var {task} = this.state;
+        var index = this.findIndex(id);
+        var taskEditing = task[index];
+        this.setState({
+            taskEditing:taskEditing
+        });
+        this.onShowForm();
+    }
+    onFilter = (filterName, filterStatus) => {
+        filterStatus = parseInt(filterStatus, 10);
+        this.setState({
+            filter: {
+                name: filterName.toLowerCase(),
+                status: filterStatus
+            }
+        })
     }
   render() {
-      var { task, isDisplayForm } = this.state;
-      var elmTaskForm = isDisplayForm ? <TaskForm onSubmit={this.onSubmit} onCloseForm={this.onCloseForm}/>:'';
+      var { task, isDisplayForm, taskEditing, filter } = this.state;
+      if(filter){
+          if(filter.name){
+              task = task.filter((task) => {
+                  return task.name.toLowerCase().indexOf(filter.name) !== -1;
+              })
+          }
+          task = task.filter((task) => {
+              if(filter.status === -1){
+                    return task;
+              }else{
+                    return task.status === (filter.status === 1 ? true:false);
+              }
+                
+          })
+      }
+      var elmTaskForm = isDisplayForm ? <TaskForm 
+                                            onSubmit={this.onSubmit} 
+                                            onCloseForm={this.onCloseForm}
+                                            task = {taskEditing}
+                                        />:'';
       
     return (
       <div className="container">
@@ -99,11 +195,17 @@ class App extends Component {
                 >
                     <span className="fa fa-plus mr-5"></span>Thêm Công Việc
                 </button>
-                <button type="button" className="btn btn-danger ml-5" onClick={this.onGenerateData}>
+                {/* <button type="button" className="btn btn-danger ml-5" onClick={this.onGenerateData}>
                     Generate Data
-                </button>
+                </button> */}
                 <Control />
-                <TaskList task={task}/>
+                <TaskList 
+                    task={task} 
+                    onUpdateStatus={this.onUpdateStatus}
+                    onDelete = {this.onDelete}
+                    onUpdate = {this.onUpdate}
+                    onFilter = {this.onFilter}
+                />
             </div>
         </div>
     </div>
