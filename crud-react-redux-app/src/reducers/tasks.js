@@ -14,13 +14,11 @@ const myReducer = (state = initialState, action) => {
         case types.LIST_ALL:
             return state;
         case types.ADD_TASK:
-            console.log(action);
             var newTask = {
                 id: generateID(),
                 name: action.task.name,
                 status: action.task.status
             }
-            console.log(action.task.status);
             state.push(newTask);
             localStorage.setItem('task', JSON.stringify(state));
             return [...state]; // tránh được trường hợp tham chiếu vùng nhớ, ...state sẽ copy data từ state ban đầu và trả về 1 mảng mới
