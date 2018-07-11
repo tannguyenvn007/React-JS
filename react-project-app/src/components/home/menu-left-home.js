@@ -18,7 +18,7 @@ class MenuLeftHome extends Component {
                                                         <ul className="nav navbar-nav verticalmenu">
                                                             <li className=" parent dropdown ">
                                                                 <a href="grid.html" className="dropdown-toggle" data-toggle="dropdown">
-                                                                    <span className="menu-title">Women</span><b className="round-arrow"></b>
+                                                                    <span className="menu-title">Fresh vegetable</span><b className="round-arrow"></b>
                                                                 </a>
                                                                 <div className="dropdown-menu">
                                                                     <div className="dropdown-menu-inner">
@@ -44,8 +44,8 @@ class MenuLeftHome extends Component {
                                                                     </div>
                                                                 </div>
                                                             </li>
-                                                            <li className=""> <a href="grid.html"><span className="menu-title"> Boys</span></a></li>
-                                                            <li className=""> <a href="grid.html"><span className="menu-title">Girls</span></a></li>
+                                                            <li className=""> <a href="grid.html"><span className="menu-title"> Fresh meat</span></a></li>
+                                                            <li className=""> <a href="grid.html"><span className="menu-title">Frest fruit</span></a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -58,8 +58,18 @@ class MenuLeftHome extends Component {
                                 <div id='rev_slider_4_wrapper' className='rev_slider_wrapper fullwidthbanner-container' >
                                     <div id='rev_slider_4' className='rev_slider fullwidthabanner'>
                                         <ul>
-                                            <li data-transition='random' data-slotamount='7' data-masterspeed='1000' data-thumb='images/slider_img_2.jpg'>
-                                                <img src='images/slide/slide1.jpg' data-bgposition='left top' data-bgfit='cover' data-bgrepeat='no-repeat' alt="banner" />
+                                            <li 
+                                                data-transition='random' 
+                                                data-slotamount='7' 
+                                                data-masterspeed='1000' 
+                                                data-thumb='images/slide/slide1.jpg'>
+                                                <img 
+                                                    src='images/slide/slide1.jpg' 
+                                                    data-bgposition='left top' 
+                                                    data-bgfit='cover' 
+                                                    data-bgrepeat='no-repeat' 
+                                                    alt="banner" 
+                                                />
                                                 <div
                                                     className='tp-caption ExtraLargeTitle sft  tp-resizeme '
                                                     data-x='45'
@@ -139,7 +149,14 @@ class MenuLeftHome extends Component {
                                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     </div>
                                             </li>
-                                            <li data-transition='random' data-slotamount='7' data-masterspeed='1000' data-thumb='images/slider_img_2.jpg' className="black-text"><img src='images/slide-img2.jpg' data-bgposition='left top' data-bgfit='cover' data-bgrepeat='no-repeat' alt="banner" />
+                                            <li 
+                                                data-transition='random'
+                                                data-slotamount='7' 
+                                                data-masterspeed='1000' 
+                                                data-thumb='images/slide/slide3.jpg' 
+                                                className="black-text">
+                                                    <img src='images/slide/slide3.jpg' 
+                                                    data-bgposition='left top' data-bgfit='cover' data-bgrepeat='no-repeat' alt="banner" />
                                                 <div
                                                     className='tp-caption ExtraLargeTitle sft  tp-resizeme '
                                                     data-x='45'
