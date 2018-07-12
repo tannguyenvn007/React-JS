@@ -5,27 +5,23 @@ class Slide extends Component {
         return (
             <div>
                 <div className="container">
-                <h2>Carousel Example</h2>  
                 <div id="myCarousel" className="carousel slide" data-ride="carousel">
-                    
                     <ol className="carousel-indicators">
                     <li data-target="#myCarousel" data-slide-to="0" className="active"></li>
                     <li data-target="#myCarousel" data-slide-to="1"></li>
                     <li data-target="#myCarousel" data-slide-to="2"></li>
                     </ol>
-
-                    
                     <div className="carousel-inner">
                     <div className="item active">
-                        <img src="assets/dest/images/thumbs/1.jpg" alt="Los Angeles" style={{width:"100%"}}/>
+                        <img src="image/slide/slide/slide3.jpg" alt="Los Angeles" style={{width:"100%"}}/>
                     </div>
 
-                    <div className="item">
-                        <img src="assets/dest/images/thumbs/1.jpg" alt="Chicago" style={{width:"100%"}}/>
-                    </div>
+                    {/* <div className="item">
+                        <img src="image/slide/slide/slide1.jpg" alt="Chicago" style={{width:"100%"}}/>
+                    </div> */}
                     
                     <div className="item">
-                        <img src="assets/dest/images/thumbs/1.jpg" alt="New york" style={{width:"100%"}}/>
+                        <img src="image/slide/slide/slide2.jpg" alt="New york" style={{width:"100%"}}/>
                     </div>
                     </div>
 

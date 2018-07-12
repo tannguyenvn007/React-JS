@@ -1,5 +1,5 @@
 import React,{ Component } from "react";
-
+import {Link} from 'react-router-dom';
 class About extends Component {
 
     componentDidMount() {
@@ -18,7 +18,7 @@ class About extends Component {
                         </div>
                         <div className="pull-right">
                             <div className="beta-breadcrumb font-large">
-                                <a href="index.html">Home</a> / <span>Giới thiệu</span>
+                                <Link to="/">Home</Link> / <span>Giới thiệu</span>
                             </div>
                         </div>
                         <div className="clearfix"></div>

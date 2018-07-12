@@ -1139,7 +1139,7 @@ padding:20px 0 0px
 }
 
 .main-menu {
-height:60px;
+height: 45px;
 display:table-cell;
 vertical-align:middle;
 font-weight:400
@@ -1159,7 +1159,7 @@ text-transform:uppercase
 }
 
 .main-menu a {
-font-family:"Open Sans",sans-serif;
+/* font-family:"Open Sans",sans-serif; */
 font-size:16px
 }
 
@@ -5061,7 +5061,7 @@ position: relative;}
     -o-transition: all 0.17s ease-in-out;
 }
 .main-menu li{position: relative;}
-.main-menu ul.l-inline> li> a:hover{background: #3a5c83;color:white;
+.main-menu ul.l-inline> li> a:hover{background: #f9ce1d;color:white;
 transition: all 0.17s ease-in-out;
     -moz-transition: all 0.17s ease-in-out;
     -webkit-transition: all 0.17s ease-in-out;
@@ -5131,7 +5131,7 @@ font-size: 35px;}
 .beta-pricing span.beta-price-button{float:left;width:100%;background:white;text-align:center;border-top: 1px solid #e1e1e1;padding: 30px 0;background-color: #f6f6f6; float:left;border-left: 1px solid #e1e1e1;border-right: 1px solid #e1e1e1;border-bottom: 1px solid #e1e1e1;}
 .beta-pricing span.beta-price-button a{background: #406590;}
 
-.main-menu ul li.active> a{background:#3a5c83; color:white!important;}
+.main-menu ul li.active> a{background:#f9ce1d; color:white!important;}
 .sub-menu li.active, .children li.active{background:#3a5c83; color:white!important;}
 .sub-menu li a, .children li a{font-size:14px;}
 .sub-menu{width:240px;}

@@ -1,5 +1,6 @@
 import React,{ Component } from "react";
 
+import {Link} from 'react-router-dom';
 class Contact extends Component {
     render(){
         return (
@@ -11,7 +12,7 @@ class Contact extends Component {
                         </div>
                         <div className="pull-right">
                             <div className="beta-breadcrumb font-large">
-                                <a href="index.html">Home</a> / <span>Contacts</span>
+                                <Link to="/">Home</Link> / <span>Contacts</span>
                             </div>
                         </div>
                         <div className="clearfix"></div>

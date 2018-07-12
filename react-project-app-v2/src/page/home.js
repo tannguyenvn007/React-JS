@@ -1,10 +1,39 @@
-import React,{ Component } from "react";
+import React, { Component } from "react";
 import Slide from "./../components/slide"
+import ProductNew from "../components/product_new";
+import { connect } from 'react-redux';
+import axios from 'axios';
+
+
+
 class Home extends Component {
-    render(){
+    constructor(props){
+        super(props);
+        this.state = {
+            products: [],
+        }
+    }
+    componentDidMount(){
+        axios({
+            method: 'GET',
+            url: "https://www.mockapi.io/api/mocks/5b42e42263839a00144c0187/resources/5b42e44163839a00144c0189/data?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1YjIwOTU0ZWNhNzYyMDAwMTQ3YjI1YzAiLCJpYXQiOjE1Mjg4NjIwMzA5NzEsImV4cCI6MTUzMTQ1NDAzMDk3MX0.ZfVZMVkbCo2OTCLxTzHvjB2Yl73EvdMLORYUiP7gFjM",
+            data: null
+        }).then(res => {
+            console.log(res);
+            this.setState({
+                products: res.data
+            })
+        }).catch( err => {
+            console.log(err);
+        });
+    }
+    render() {
+        // var { products } = this.props;
+        var {products} = this.state;
+        
         return (
-            <div className ="rev-slider">
-                <Slide/>
+            <div className="rev-slider">
+                <Slide />
                 <div className="container">
                     <div id="content" className="space-top-none">
                         <div className="main-content">
@@ -17,267 +46,36 @@ class Home extends Component {
                                             <p className="pull-left">438 styles found</p>
                                             <div className="clearfix"></div>
                                         </div>
-
                                         <div className="row">
-                                            <div className="col-sm-3">
-                                                <div className="single-item">
-                                                    <div className="single-item-header">
-                                                        <a href="product.html">
-                                                            <img src="assets/dest/images/products/1.jpg" alt=""/>
-                                                        </a>
-                                                    </div>
-                                                    <div className="single-item-body">
-                                                        <p className="single-item-title">Sample Woman Top</p>
-                                                        <p className="single-item-price">
-                                                            <span>$34.55</span>
-                                                        </p>
-                                                    </div>
-                                                    <div className="single-item-caption">
-                                                        <a className="add-to-cart pull-left" href="shopping_cart.html"><i className="fa fa-shopping-cart"></i></a>
-                                                        <a className="beta-btn primary" href="product.html">Details <i className="fa fa-chevron-right"></i></a>
-                                                        <div className="clearfix"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-sm-3">
-                                                <div className="single-item">
-                                                    <div className="ribbon-wrapper"><div className="ribbon sale">Sale</div></div>
-
-                                                    <div className="single-item-header">
-                                                        <a href="product.html"><img src="assets/dest/images/products/2.jpg" alt=""/></a>
-                                                    </div>
-                                                    <div className="single-item-body">
-                                                        <p className="single-item-title">Sample Woman Top</p>
-                                                        <p className="single-item-price">
-                                                            <span className="flash-del">$34.55</span>
-                                                            <span className="flash-sale">$33.55</span>
-                                                        </p>
-                                                    </div>
-                                                    <div className="single-item-caption">
-                                                        <a className="add-to-cart pull-left" href="shopping_cart.html"><i className="fa fa-shopping-cart"></i></a>
-                                                        <a className="beta-btn primary" href="product.html">Details <i className="fa fa-chevron-right"></i></a>
-                                                        <div className="clearfix"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-sm-3">
-                                                <div className="single-item">
-                                                    <div className="single-item-header">
-                                                        <a href="product.html"><img src="assets/dest/images/products/3.jpg" alt=""/></a>
-                                                    </div>
-                                                    <div className="single-item-body">
-                                                        <p className="single-item-title">Sample Woman Top</p>
-                                                        <p className="single-item-price">
-                                                            <span>$34.55</span>
-                                                        </p>
-                                                    </div>
-                                                    <div className="single-item-caption">
-                                                        <a className="add-to-cart pull-left" href="shopping_cart.html"><i className="fa fa-shopping-cart"></i></a>
-                                                        <a className="beta-btn primary" href="product.html">Details <i className="fa fa-chevron-right"></i></a>
-                                                        <div className="clearfix"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-sm-3">
-                                                <div className="single-item">
-                                                    <div className="single-item-header">
-                                                        <a href="product.html"><img src="assets/dest/images/products/3.jpg" alt=""/></a>
-                                                    </div>
-                                                    <div className="single-item-body">
-                                                        <p className="single-item-title">Sample Woman Top</p>
-                                                        <p className="single-item-price">
-                                                            <span>$34.55</span>
-                                                        </p>
-                                                    </div>
-                                                    <div className="single-item-caption">
-                                                        <a className="add-to-cart pull-left" href="shopping_cart.html"><i className="fa fa-shopping-cart"></i></a>
-                                                        <a className="beta-btn primary" href="product.html">Details <i className="fa fa-chevron-right"></i></a>
-                                                        <div className="clearfix"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            {this.showProduct(products)}
                                         </div>
-                                    </div> 
-                                    {/* <!-- .beta-products-list --> */}
-
-                                    <div className="space50">&nbsp;</div>
-
-                                    <div className="beta-products-list">
-                                        <h4>Top Products</h4>
-                                        <div className="beta-products-details">
-                                            <p className="pull-left">438 styles found</p>
-                                            <div className="clearfix"></div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="col-sm-3">
-                                                <div className="single-item">
-                                                    <div className="single-item-header">
-                                                        <a href="product.html"><img src="assets/dest/images/products/1.jpg" alt=""/></a>
-                                                    </div>
-                                                    <div className="single-item-body">
-                                                        <p className="single-item-title">Sample Woman Top</p>
-                                                        <p className="single-item-price">
-                                                            <span>$34.55</span>
-                                                        </p>
-                                                    </div>
-                                                    <div className="single-item-caption">
-                                                        <a className="add-to-cart pull-left" href="shopping_cart.html"><i className="fa fa-shopping-cart"></i></a>
-                                                        <a className="beta-btn primary" href="product.html">Details <i className="fa fa-chevron-right"></i></a>
-                                                        <div className="clearfix"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-sm-3">
-                                                <div className="single-item">
-                                                    <div className="ribbon-wrapper"><div className="ribbon sale">Sale</div></div>
-
-                                                    <div className="single-item-header">
-                                                        <a href="product.html"><img src="assets/dest/images/products/2.jpg" alt=""/></a>
-                                                    </div>
-                                                    <div className="single-item-body">
-                                                        <p className="single-item-title">Sample Woman Top</p>
-                                                        <p className="single-item-price">
-                                                            <span className="flash-del">$34.55</span>
-                                                            <span className="flash-sale">$33.55</span>
-                                                        </p>
-                                                    </div>
-                                                    <div className="single-item-caption">
-                                                        <a className="add-to-cart pull-left" href="shopping_cart.html"><i className="fa fa-shopping-cart"></i></a>
-                                                        <a className="beta-btn primary" href="product.html">Details <i className="fa fa-chevron-right"></i></a>
-                                                        <div className="clearfix"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-sm-3">
-                                                <div className="single-item">
-                                                    <div className="single-item-header">
-                                                        <a href="product.html"><img src="assets/dest/images/products/3.jpg" alt=""/></a>
-                                                    </div>
-                                                    <div className="single-item-body">
-                                                        <p className="single-item-title">Sample Woman Top</p>
-                                                        <p className="single-item-price">
-                                                            <span>$34.55</span>
-                                                        </p>
-                                                    </div>
-                                                    <div className="single-item-caption">
-                                                        <a className="add-to-cart pull-left" href="shopping_cart.html"><i className="fa fa-shopping-cart"></i></a>
-                                                        <a className="beta-btn primary" href="product.html">Details <i className="fa fa-chevron-right"></i></a>
-                                                        <div className="clearfix"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-sm-3">
-                                                <div className="single-item">
-                                                    <div className="single-item-header">
-                                                        <a href="product.html"><img src="assets/dest/images/products/3.jpg" alt=""/></a>
-                                                    </div>
-                                                    <div className="single-item-body">
-                                                        <p className="single-item-title">Sample Woman Top</p>
-                                                        <p className="single-item-price">
-                                                            <span>$34.55</span>
-                                                        </p>
-                                                    </div>
-                                                    <div className="single-item-caption">
-                                                        <a className="add-to-cart pull-left" href="shopping_cart.html"><i className="fa fa-shopping-cart"></i></a>
-                                                        <a className="beta-btn primary" href="product.html">Details <i className="fa fa-chevron-right"></i></a>
-                                                        <div className="clearfix"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="space40">&nbsp;</div>
-                                        <div className="row">
-                                            <div className="col-sm-3">
-                                                <div className="single-item">
-                                                    <div className="single-item-header">
-                                                        <a href="product.html"><img src="assets/dest/images/products/1.jpg" alt=""/></a>
-                                                    </div>
-                                                    <div className="single-item-body">
-                                                        <p className="single-item-title">Sample Woman Top</p>
-                                                        <p className="single-item-price">
-                                                            <span>$34.55</span>
-                                                        </p>
-                                                    </div>
-                                                    <div className="single-item-caption">
-                                                        <a className="add-to-cart pull-left" href="shopping_cart.html"><i className="fa fa-shopping-cart"></i></a>
-                                                        <a className="beta-btn primary" href="product.html">Details <i className="fa fa-chevron-right"></i></a>
-                                                        <div className="clearfix"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-sm-3">
-                                                <div className="single-item">
-                                                    <div className="ribbon-wrapper"><div className="ribbon sale">Sale</div></div>
-
-                                                    <div className="single-item-header">
-                                                        <a href="product.html"><img src="assets/dest/images/products/2.jpg" alt=""/></a>
-                                                    </div>
-                                                    <div className="single-item-body">
-                                                        <p className="single-item-title">Sample Woman Top</p>
-                                                        <p className="single-item-price">
-                                                            <span className="flash-del">$34.55</span>
-                                                            <span className="flash-sale">$33.55</span>
-                                                        </p>
-                                                    </div>
-                                                    <div className="single-item-caption">
-                                                        <a className="add-to-cart pull-left" href="shopping_cart.html"><i className="fa fa-shopping-cart"></i></a>
-                                                        <a className="beta-btn primary" href="product.html">Details <i className="fa fa-chevron-right"></i></a>
-                                                        <div className="clearfix"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-sm-3">
-                                                <div className="single-item">
-                                                    <div className="single-item-header">
-                                                        <a href="product.html"><img src="assets/dest/images/products/3.jpg" alt=""/></a>
-                                                    </div>
-                                                    <div className="single-item-body">
-                                                        <p className="single-item-title">Sample Woman Top</p>
-                                                        <p className="single-item-price">
-                                                            <span>$34.55</span>
-                                                        </p>
-                                                    </div>
-                                                    <div className="single-item-caption">
-                                                        <a className="add-to-cart pull-left" href="shopping_cart.html"><i className="fa fa-shopping-cart"></i></a>
-                                                        <a className="beta-btn primary" href="product.html">Details <i className="fa fa-chevron-right"></i></a>
-                                                        <div className="clearfix"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-sm-3">
-                                                <div className="single-item">
-                                                    <div className="single-item-header">
-                                                        <a href="product.html"><img src="assets/dest/images/products/3.jpg" alt=""/></a>
-                                                    </div>
-                                                    <div className="single-item-body">
-                                                        <p className="single-item-title">Sample Woman Top</p>
-                                                        <p className="single-item-price">
-                                                            <span>$34.55</span>
-                                                        </p>
-                                                    </div>
-                                                    <div className="single-item-caption">
-                                                        <a className="add-to-cart pull-left" href="shopping_cart.html"><i className="fa fa-shopping-cart"></i></a>
-                                                        <a className="beta-btn primary" href="product.html">Details <i className="fa fa-chevron-right"></i></a>
-                                                        <div className="clearfix"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                       
                                     </div>
-                                    {/* <!-- .beta-products-list --> */}
                                 </div>
-                            </div> 
-                            {/* <!-- end section with sidebar and main content --> */}
-
-
-                        </div> 
-                        {/* <!-- .main-content --> */}
-                    </div> 
-                    {/* <!-- #content --> */}
-                </div> 
-                {/* <!-- .container --> */}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
             </div>
         )
     }
+    showProduct(products) {
+        var result = null;
+        if (products.length > 0) {
+            result = products.map((product, index) => {
+                return <ProductNew key={index} product={product} index={index} />
+            })
+        }
+        return result;
+    }
+
 }
-export default Home;
+
+
+const mapStateToProps = (state) => {
+    return {
+        products: state.products
+    }
+}
+export default connect(mapStateToProps, null)(Home);

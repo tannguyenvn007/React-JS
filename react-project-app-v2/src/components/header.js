@@ -90,7 +90,7 @@ class Header extends Component {
                             <div className="clearfix"></div>
                         </div> 
                     </div> 
-                    <div className="header-bottom" style={{backgroundColor: '#0277b8'}}>
+                    <div className="header-bottom" style={{backgroundColor:" #65d31f"}}>
                         <div className="container">
                             <a className="visible-xs beta-menu-toggle pull-right" href=""><span className='beta-menu-toggle-text'>Menu</span> <i className="fa fa-bars"></i></a>
                             <div className="visible-xs clearfix"></div>

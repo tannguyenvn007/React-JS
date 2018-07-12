@@ -15,6 +15,9 @@
 	color: black
 }
 .main-menu>ul.l-inline> li> a{
-	color: #fff;
-	padding: 10px 35px
+  color: #fff;
+  font-weight: bold;
+  padding: 10px 35px;
+  font-size: 12px;
+  text-transform: uppercase;
 }

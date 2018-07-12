@@ -1,7 +1,7 @@
 import React from 'react'
 import Home from './page/home';
 import NotFound from './page/not-found';
-import Product from './page/product';
+import Product from './page/product_page';
 import About from './page/about';
 import Contact from './page/contact';
 
