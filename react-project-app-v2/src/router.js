@@ -4,6 +4,7 @@ import NotFound from './page/not-found';
 import Product from './page/product_page';
 import About from './page/about';
 import Contact from './page/contact';
+import Manage from './page/manage/manage';
 
 
 const routes = [
@@ -26,6 +27,11 @@ const routes = [
         path: '/contact',
         exact: false,
         main: () => <Contact/>
+    },
+    {
+        path: '/manage',
+        exact: false,
+        main: () => <Manage/>
     },
     {
         path: '',

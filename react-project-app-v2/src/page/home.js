@@ -16,7 +16,7 @@ class Home extends Component {
     componentDidMount(){
         axios({
             method: 'GET',
-            url: "https://www.mockapi.io/api/mocks/5b42e42263839a00144c0187/resources/5b42e44163839a00144c0189/data?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1YjIwOTU0ZWNhNzYyMDAwMTQ3YjI1YzAiLCJpYXQiOjE1Mjg4NjIwMzA5NzEsImV4cCI6MTUzMTQ1NDAzMDk3MX0.ZfVZMVkbCo2OTCLxTzHvjB2Yl73EvdMLORYUiP7gFjM",
+            url: "https://www.mockapi.io/api/mocks/5b42e42263839a00144c0187/resources/5b42e44163839a00144c0189/data?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1YjIwOTU0ZWNhNzYyMDAwMTQ3YjI1YzAiLCJpYXQiOjE1MzE0NTQxNjQyNjYsImV4cCI6MTUzNDA0NjE2NDI2Nn0.qH6Y0XxXGFlJA_3FpnwbXC9E1COSV25AVHurmWpQ4Xw",
             data: null
         }).then(res => {
             console.log(res);
@@ -48,6 +48,7 @@ class Home extends Component {
                                         </div>
                                         <div className="row">
                                             {this.showProduct(products)}
+                                            
                                         </div>
                                        
                                     </div>
@@ -65,6 +66,7 @@ class Home extends Component {
         if (products.length > 0) {
             result = products.map((product, index) => {
                 return <ProductNew key={index} product={product} index={index} />
+                
             })
         }
         return result;
