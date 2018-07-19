@@ -10,7 +10,7 @@ class ProductNew extends Component {
                     <div className="single-item">
                         <div className="single-item-header">
                             <a href="product.html">
-                                <img src={product.image} alt="" />
+                                <img src={`image/product/product/${product.image}`} alt="" />
                             </a>
                         </div>
                         <div className="single-item-body">

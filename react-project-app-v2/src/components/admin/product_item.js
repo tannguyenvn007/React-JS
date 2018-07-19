@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
-
+import {Link} from 'react-router-dom'
+const formatCurrency = require('format-currency')
 
 class ProductItem extends Component {
+    onDelete = (id,CategoryId) => {
+        if(window.confirm("Are you sure ?")){
+            this.props.onDelete(id,CategoryId);
+        }
+        
+    }
     render() {
+        let opts = { format: '%v %c', code: 'VND' }
         var {index, product} = this.props;
         if (!product) return null; 
-        console.log("adsasd6565665",product)
         return (
 
             
@@ -13,18 +20,18 @@ class ProductItem extends Component {
                     <td>{index + 1}</td>
                     <td>{product.id}</td>
                     <td>{product.name}</td>
-                    <td><img src={product.image} width="100px" height="100px" /></td>
-                    <td>50000</td>
+                    <td><img src={`image/product/product/${product.image}`} width="100px" height="100px" alt="product"/></td>
+                    <td>{formatCurrency(product.price, opts)}</td>
                     <td>
 
-                        <span className="label label-warning">Con hang</span>
+                        <span className="label label-warning">{product.status === true ? "New" : "Old"}</span>
 
                     </td>
-                    <td>Ngon</td>
+                    <td>{product.description}</td>
                     <td>
 
-                        <button type="button" class="btn btn-danger mr-10">Edit</button>
-                        <button type="button" class="btn btn-warning">Delete</button>
+                        <Link to={`${product.CategoryId}/${product.id}/edit`} className="btn btn-danger mr-10">Edit</Link>
+                        <button type="button" className="btn btn-warning" onClick={() => this.onDelete(product.id,product.CategoryId)}>Delete</button>
 
                     </td>
                 </tr>

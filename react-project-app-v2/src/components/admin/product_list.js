@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import ProductItem from './product_item';
 
 
 class ProductList extends Component {
     render() {
-        var {index, product} =this.props;
         return (
             
             <div className="panel panel-primary">
@@ -25,9 +23,10 @@ class ProductList extends Component {
                                 <th>DESCRIPTION</th>
                                 <th>ACTION</th>
                             </tr>
+                            
                         </thead>
                         <tbody>
-                            {this.props.children}
+                            {this.props.children}      
                         </tbody>
                     </table>
 

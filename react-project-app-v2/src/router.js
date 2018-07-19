@@ -5,6 +5,7 @@ import Product from './page/product_page';
 import About from './page/about';
 import Contact from './page/contact';
 import Manage from './page/manage/manage';
+import ProductAction from './page/manage/productAction';
 
 
 const routes = [
@@ -32,6 +33,16 @@ const routes = [
         path: '/manage',
         exact: false,
         main: () => <Manage/>
+    },
+    {
+        path: '/add',
+        exact: false,
+        main: ({history}) => <ProductAction history={history}/>
+    },
+    {
+        path: '/:id/:id/edit',
+        exact: false,
+        main: ({history,match}) => <ProductAction history={history} match={match}/>
     },
     {
         path: '',
