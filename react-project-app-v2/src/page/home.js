@@ -4,7 +4,7 @@ import ProductNew from "../components/product_new";
 import { connect } from 'react-redux';
 import axios from 'axios';
 
-
+import {FetchProducts} from './../actions/index'
 
 class Home extends Component {
     constructor(props){
@@ -19,17 +19,14 @@ class Home extends Component {
             url: "https://www.mockapi.io/api/mocks/5b42e42263839a00144c0187/resources/5b42e44163839a00144c0189/data?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1YjIwOTU0ZWNhNzYyMDAwMTQ3YjI1YzAiLCJpYXQiOjE1MzE0NTQxNjQyNjYsImV4cCI6MTUzNDA0NjE2NDI2Nn0.qH6Y0XxXGFlJA_3FpnwbXC9E1COSV25AVHurmWpQ4Xw",
             data: null
         }).then(res => {
-            console.log(res);
-            this.setState({
-                products: res.data
-            })
+            this.props.fetchAllProducts(res.data);
         }).catch( err => {
             console.log(err);
         });
     }
     render() {
-        // var { products } = this.props;
-        var {products} = this.state;
+        var { products } = this.props;
+        
         
         return (
             <div className="rev-slider">
@@ -80,4 +77,12 @@ const mapStateToProps = (state) => {
         products: state.products
     }
 }
-export default connect(mapStateToProps, null)(Home);
+
+const  mapDispatchToProps = (dispatch,props) => {
+    return {
+        fetchAllProducts: (products) => {
+            dispatch(FetchProducts(products));
+        }
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

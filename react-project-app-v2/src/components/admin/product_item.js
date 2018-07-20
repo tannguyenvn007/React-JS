@@ -14,17 +14,16 @@ class ProductItem extends Component {
         var {index, product} = this.props;
         if (!product) return null; 
         return (
-
             
                 <tr>
                     <td>{index + 1}</td>
                     <td>{product.id}</td>
                     <td>{product.name}</td>
-                    <td><img src={`image/product/product/${product.image}`} width="100px" height="100px" alt="product"/></td>
+                    <td><img className="img-thumbnail" src={`image/product/product/${product.image.substr(12)}`} width="100px" height="100px" alt="product"/></td>
                     <td>{formatCurrency(product.price, opts)}</td>
                     <td>
 
-                        <span className="label label-warning">{product.status === true ? "New" : "Old"}</span>
+                        <span className={product.status === true ? "label label-success" : "label label-warning"}>{product.status === true ? "New" : "Old"}</span>
 
                     </td>
                     <td>{product.description}</td>

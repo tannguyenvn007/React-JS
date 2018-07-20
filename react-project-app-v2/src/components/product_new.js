@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-
+const formatCurrency = require('format-currency')
 class ProductNew extends Component {
     render() {
+        let opts = { format: '%v %c', code: 'VND' }
         var { product } = this.props;
         return (
 
@@ -10,13 +11,13 @@ class ProductNew extends Component {
                     <div className="single-item">
                         <div className="single-item-header">
                             <a href="product.html">
-                                <img src={`image/product/product/${product.image}`} alt="" />
+                                <img  src={`image/product/product/${product.image.substr(12)}`} alt="" />
                             </a>
                         </div>
                         <div className="single-item-body">
                             <p className="single-item-title">{product.name}</p>
                             <p className="single-item-price">
-                                <span>${product.price}</span>
+                                <span>{formatCurrency(product.price, opts)}</span>
                             </p>
                         </div>
                         <div className="single-item-caption">
