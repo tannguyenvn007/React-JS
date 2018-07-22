@@ -6,6 +6,7 @@ import About from './page/about';
 import Contact from './page/contact';
 import Manage from './page/manage/manage';
 import ProductAction from './page/manage/productAction';
+import ProductDetails from './page/product_details';
 
 
 const routes = [
@@ -18,6 +19,11 @@ const routes = [
         path: '/product',
         exact: false,
         main: () => <Product/>
+    },
+    {
+        path: '/:id/details',
+        exact: false,
+        main: () => <ProductDetails/>
     },
     {
         path: '/about',

@@ -1,12 +1,17 @@
 import React, {Component} from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+
 import ProductList from '../../components/admin/product_list';
 import ProductItem from '../../components/admin/product_item';
-import ProductAction from './productAction'
 
-import callApi from './../../apiCaller';
+
+
 import {Link} from 'react-router-dom';
-import findIndex from 'lodash'
+
+import { connect } from 'react-redux';
+
+
+import {FetchProductsAPI,DeleteProductAPI} from './../../actions/index'
+
 class Manage extends Component {
     constructor(props){
         super(props);
@@ -15,31 +20,15 @@ class Manage extends Component {
         }
     }
     componentDidMount(){
-        callApi("http://www.mockapi.io/api/mocks/5b42e42263839a00144c0187/resources/5b42e44163839a00144c0189/data?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1YjIwOTU0ZWNhNzYyMDAwMTQ3YjI1YzAiLCJpYXQiOjE1MzE3MzMyMTc5OTYsImV4cCI6MTUzNDMyNTIxNzk5Nn0.NNByU7jTab7xv03bUztcEpzgoHjFt5dZIBCG6_CsSzI",'GET',null).then(res => {
-            this.setState({
-                products: res.data
-            })
-        })
+        this.props.fetchAllProducts();
     }
     onDelete = (id,category) => {
-        var {products} = this.state;
-        callApi(`http://5b42e42263839a00144c0186.mockapi.io/Categories/${category}/products/${id}`,'DELETE',null).then(res => {
-            if(res.status === 200) {
-                var index = findIndex(products,id);
-                console.log('index',index);
-                if (index !== -1 ){
-                    products.splice(index,1);
-                    this.setState({
-                        products: products
-                    })
-                }
-            }
-        })
+        this.props.onDeleteProduct(id,category);
 
     }
     render(){
         
-        var {products}=this.state;
+        var {products}=this.props;
 
         return (
             <div className="container">
@@ -75,4 +64,20 @@ class Manage extends Component {
     }
     
 }
-export default Manage;
+const mapStateToProps = (state) => {
+    return {
+        products: state.products
+    }
+}
+
+const  mapDispatchToProps = (dispatch,props) => {
+    return {
+        fetchAllProducts: () => {
+            dispatch(FetchProductsAPI());
+        },
+        onDeleteProduct: (id,category) => {
+            dispatch(DeleteProductAPI(id,category));
+        }
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps) (Manage);

@@ -2,32 +2,17 @@ import React, { Component } from "react";
 import Slide from "./../components/slide"
 import ProductNew from "../components/product_new";
 import { connect } from 'react-redux';
-import axios from 'axios';
 
-import {FetchProducts} from './../actions/index'
+
+import {FetchProductsAPI} from './../actions/index'
 
 class Home extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            products: [],
-        }
-    }
+    
     componentDidMount(){
-        axios({
-            method: 'GET',
-            url: "https://www.mockapi.io/api/mocks/5b42e42263839a00144c0187/resources/5b42e44163839a00144c0189/data?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1YjIwOTU0ZWNhNzYyMDAwMTQ3YjI1YzAiLCJpYXQiOjE1MzE0NTQxNjQyNjYsImV4cCI6MTUzNDA0NjE2NDI2Nn0.qH6Y0XxXGFlJA_3FpnwbXC9E1COSV25AVHurmWpQ4Xw",
-            data: null
-        }).then(res => {
-            this.props.fetchAllProducts(res.data);
-        }).catch( err => {
-            console.log(err);
-        });
+        this.props.fetchAllProducts();
     }
     render() {
         var { products } = this.props;
-        
-        
         return (
             <div className="rev-slider">
                 <Slide />
@@ -80,8 +65,8 @@ const mapStateToProps = (state) => {
 
 const  mapDispatchToProps = (dispatch,props) => {
     return {
-        fetchAllProducts: (products) => {
-            dispatch(FetchProducts(products));
+        fetchAllProducts: () => {
+            dispatch(FetchProductsAPI());
         }
     }
 }
