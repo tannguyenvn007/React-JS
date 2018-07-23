@@ -6,12 +6,14 @@ import { connect } from 'react-redux';
 
 import {FetchProductsAPI} from './../actions/index'
 
+
 class Home extends Component {
     
     componentDidMount(){
         this.props.fetchAllProducts();
     }
     render() {
+        
         var { products } = this.props;
         return (
             <div className="rev-slider">
@@ -29,6 +31,7 @@ class Home extends Component {
                                             <div className="clearfix"></div>
                                         </div>
                                         <div className="row">
+                                        
                                             {this.showProduct(products)}
                                             
                                         </div>

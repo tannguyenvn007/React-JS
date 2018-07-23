@@ -36,7 +36,7 @@ class Manage extends Component {
                 <div className="row">
                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         
-                        <Link to="/add" className="btn btn-info mb-10">Add product</Link>
+                        <Link to="/add" className="btn btn-info mb-10 "><span className="fa fa-plus mr-5"></span>Add product</Link>
                         
                         <ProductList>
                             {this.showProduct(products)}

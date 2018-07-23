@@ -21,9 +21,9 @@ const routes = [
         main: () => <Product/>
     },
     {
-        path: '/:id/details',
+        path: '/:id/:id/details',
         exact: false,
-        main: () => <ProductDetails/>
+        main: ({match}) => <ProductDetails match={match}/>
     },
     {
         path: '/about',

@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import callApi from "../../apiCaller";
 
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { AddProductAPI, getProductAPI, updateProductAPI } from "../../actions";
+import products from "../../reducers/product_red";
 class ProductAction extends Component {
     constructor(props) {
         super(props);
@@ -18,22 +21,23 @@ class ProductAction extends Component {
     }
     componentDidMount() {
         var { match } = this.props;
-
         if (match) {
             var id = match.params.id;
             var category = match.url.substr(1, 2);
-            console.log("message", category);
-            callApi(`http://5b42e42263839a00144c0186.mockapi.io/Categories/${category}/products/${id}`, 'GET', null).then(res => {
-                var data = res.data;
-                this.setState({
-                    id: data.id,
-                    txtName: data.name,
-                    txtImage: data.image,
-                    txtPrice: data.price,
-                    txtDes: data.description,
-                    chkbStatus: data.status,
-                    category: data.CategoryId
-                });
+            this.props.onEditProduct(id, category);
+        }
+    }
+    componentWillReceiveProps(nextProps) {
+        if (nextProps && nextProps.itemEditing) {
+            var { itemEditing } = nextProps;
+            this.setState({
+                id: itemEditing.id,
+                txtName: itemEditing.name,
+                txtImage: itemEditing.image,
+                txtPrice: itemEditing.price,
+                txtDes: itemEditing.description,
+                chkbStatus: itemEditing.status,
+                category: itemEditing.CategoryId
             });
         }
     }
@@ -49,41 +53,32 @@ class ProductAction extends Component {
         e.preventDefault();
         var { history } = this.props;
         var { id, txtName, txtPrice, txtImage, txtDes, chkbStatus, category } = this.state;
+        var product = {
+            CategoryId: category,
+            name: txtName,
+            image: txtImage,
+            price: txtPrice,
+            description: txtDes,
+            status: chkbStatus
+        }
         if (id) {
-            callApi(`http://5b42e42263839a00144c0186.mockapi.io/Categories/${category}/products/${id}`, 'PUT', {
-                CategoryId: category,
-                name: txtName,
-                image: txtImage,
-                price: txtPrice,
-                description: txtDes,
-                status: chkbStatus
-            }).then(res => {
-                history.goBack();
-            })
+            this.props.onUpdateProduct(product,category);
         } else {
-            callApi(`http://5b42e42263839a00144c0186.mockapi.io/Categories/${category}/products`, 'POST', {
-                CategoryId: category,
-                name: txtName,
-                image: txtImage,
-                price: txtPrice,
-                description: txtDes,
-                status: chkbStatus
-            }).then(res => {
-                history.goBack();
-            })
+            this.props.onAddProduct(category, product);
+            history.goBack();
         }
 
     }
     render() {
 
-        var { id,txtName, txtPrice, txtImage, txtDes, chkbStatus, category } = this.state;
+        var { id, txtName, txtPrice, txtImage, txtDes, chkbStatus, category } = this.state;
         return (
             <div className="block-action">
                 <div className="container">
-                {id ? <h1>Edit product</h1>:<h1>Add product</h1>}
-                
+                    {id ? <h1>Edit product</h1> : <h1>Add product</h1>}
+
                     <div className="content clearfix">
-                    
+
                         <div className="col-xs-1 col-sm-1 col-md-1 col-lg-1">
 
                         </div>
@@ -94,29 +89,29 @@ class ProductAction extends Component {
                                     <div className="col-sm-9">
                                         <input type="text" className="form-control " name="txtName" value={txtName} onChange={this.onChange} />
                                     </div>
-                                    
+
                                 </div>
                                 <div className="form-group">
                                     <label className="col-sm-3 control-label">Hình ảnh:</label>
                                     <div className="col-sm-9">
-                                        {txtImage !== '' ? 
-                                            <input type="text" className="form-control" name="txtImage" value={txtImage} onChange={this.onChange} /> 
-                                            : 
+                                        {txtImage !== '' ?
+                                            <input type="text" className="form-control" name="txtImage" value={txtImage} onChange={this.onChange} />
+                                            :
                                             <input type="file" className="form-control" name="txtImage" value={txtImage} onChange={this.onChange} />}
                                     </div>
-                                    
+
                                 </div>
                                 <div className="form-group">
                                     <label className="col-sm-3 control-label">Giá:</label>
                                     <div className="col-sm-9">
                                         <input type="number" className="form-control" name="txtPrice" value={txtPrice} onChange={this.onChange} />
                                     </div>
-                                    
+
                                 </div>
                                 <div className="form-group">
                                     <label className="col-sm-3 control-label">Mô tả</label>
                                     <div className="col-sm-9">
-                                        <input type="text" className="form-control" name="txtDes" value={txtDes} onChange={this.onChange} />    
+                                        <input type="text" className="form-control" name="txtDes" value={txtDes} onChange={this.onChange} />
                                     </div>
                                 </div>
                                 <div className="form-group">
@@ -134,7 +129,7 @@ class ProductAction extends Component {
                                 <div className="form-group">
                                     <label className="col-sm-3 control-label">Trạng thái:</label>
                                     <div className="checkbox col-sm-9">
-                                    
+
                                         <input
                                             type="checkbox"
                                             name="chkbStatus"
@@ -150,7 +145,7 @@ class ProductAction extends Component {
                                     <Link to="/manage" className="btn btn-danger mr-10">Back</Link>
                                     <button type="submit" className="btn btn-primary">Save</button>
                                 </div>
-                                
+
                             </form>
 
                         </div>
@@ -165,4 +160,22 @@ class ProductAction extends Component {
         )
     }
 }
-export default ProductAction;
+export const mapStateToProps = (state) => {
+    return {
+        itemEditing: state.itemEditing
+    }
+}
+export const mapDispatchToProps = (dispatch) => {
+    return {
+        onAddProduct: (category, product) => {
+            dispatch(AddProductAPI(category, product))
+        },
+        onEditProduct: (id, category) => {
+            dispatch(getProductAPI(id, category))
+        },
+        onUpdateProduct: (product, category) => {
+            dispatch(updateProductAPI(product, category));
+        }
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ProductAction);

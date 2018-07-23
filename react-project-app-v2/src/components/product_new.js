@@ -1,18 +1,20 @@
 import React, { Component } from "react";
+import {Link} from 'react-router-dom';
 const formatCurrency = require('format-currency')
 class ProductNew extends Component {
     render() {
         let opts = { format: '%v %c', code: 'VND' }
         var { product } = this.props;
+        console.log("products",product);
         return (
 
             <div>
                 <div className="col-sm-3">
                     <div className="single-item">
                         <div className="single-item-header">
-                            <a href="product.html">
+                            <Link to={`${product.CategoryId}/${product.id}/details`}>
                                 <img  src={`image/product/product/${product.image.substr(12)}`} alt="" />
-                            </a>
+                            </Link>
                         </div>
                         <div className="single-item-body">
                             <p className="single-item-title">{product.name}</p>

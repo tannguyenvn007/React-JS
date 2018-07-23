@@ -29,8 +29,8 @@ class ProductItem extends Component {
                     <td>{product.description}</td>
                     <td>
 
-                        <Link to={`${product.CategoryId}/${product.id}/edit`} className="btn btn-danger mr-10"><span className="fa fa-pencil mr-5"></span>Edit</Link>
-                        <button type="button" className="btn btn-warning" onClick={() => this.onDelete(product.id,product.CategoryId)}><span className="fa fa-trash mr-5"></span>Delete</button>
+                        <Link to={`${product.CategoryId}/${product.id}/edit`} className="btn btn-danger mr-10">Edit</Link>
+                        <button type="button" className="btn btn-warning" onClick={() => this.onDelete(product.id,product.CategoryId)}>Delete</button>
 
                     </td>
                 </tr>
