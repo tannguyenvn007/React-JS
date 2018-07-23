@@ -4,7 +4,7 @@ class Header extends Component {
     render () {
         return (
                 <div id="header">
-                    <div className="header-top">
+                    <div className="header-top bg-green">
                         <div className="container">
                             <div className="pull-left auto-width-left">
                                 <ul className="top-menu menu-beta l-inline">

@@ -86,7 +86,7 @@ a {
 border:none;
 outline:none;
 text-decoration:none;
-color:#606366;
+color:white;
 -webkit-transition:all .2s ease-in-out;
 -moz-transition:all .2s ease-in-out;
 -o-transition:all .2s ease-in-out;
@@ -1127,7 +1127,7 @@ padding:0 20px
 
 .menu-beta li a>i {
 margin-right:3px;
-color:#999da0
+color:white
 }
 
 .menu-beta li a:hover i {
