@@ -3,7 +3,6 @@ import Slide from "./../components/slide"
 import ProductNew from "../components/product_new";
 import { connect } from 'react-redux';
 
-
 import {FetchProductsAPI} from './../actions/index'
 
 
@@ -14,7 +13,14 @@ class Home extends Component {
     }
     render() {
         
-        var { products } = this.props;
+        var { products,keyword } = this.props;
+        if(keyword){
+            products = products.filter( (pro) => {
+                return pro.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1
+            });
+            console.log('product2',products);
+        }
+	
         return (
             <div className="rev-slider">
                 <Slide />
@@ -62,7 +68,8 @@ class Home extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        products: state.products
+        products: state.products,
+        keyword: state.searchProduct
     }
 }
 

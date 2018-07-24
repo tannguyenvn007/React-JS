@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import callApi from "../../apiCaller";
 
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { AddProductAPI, getProductAPI, updateProductAPI } from "../../actions";
-import products from "../../reducers/product_red";
+
 class ProductAction extends Component {
     constructor(props) {
         super(props);

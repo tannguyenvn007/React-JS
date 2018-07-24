@@ -1,7 +1,26 @@
 import React,{ Component } from "react";
 import {Link} from 'react-router-dom';
+
+import { connect } from 'react-redux';
+import { searchProduct } from "./../actions";
+
 class Header extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            keyword: ''
+        }
+    }
+    onHandleChange = (event) =>{
+        this.setState({
+            keyword: event.target.value
+        })
+    }
+    onSearch = () => {
+        this.props.onSearch(this.state.keyword);
+    }
     render () {
+        var {keyword} = this.state;
         return (
                 <div id="header">
                     <div className="header-top bg-green">
@@ -26,14 +45,19 @@ class Header extends Component {
                         <div className="container beta-relative">
                             <div className="pull-left">
                                 <a href="index.html" id="logo">
-                                <img src="assets/dest/images/logo-cake.png" width="200px" alt=""/></a>
+                                <img src="image/logo/logo.png" alt=""/></a>
                             </div>
                             <div className="pull-right beta-components space-left ov">
                                 <div className="space10">&nbsp;</div>
                                 <div className="beta-comp">
-                                    <form role="search" method="get" id="searchform" action="/">
-                                        <input type="text" value="" name="s" id="s" placeholder="Nhập từ khóa..." />
-                                        <button className="fa fa-search" type="submit" id="searchsubmit"></button>
+                                    <form   id="searchform" >
+                                        <input 
+                                            type="text" 
+                                            value={keyword}
+                                            name="keyword" 
+                                            onChange={this.onHandleChange}
+                                            placeholder="Nhập từ khóa..." />
+                                        <button onClick={this.onSearch} className="fa fa-search" type="button" id="searchsubmit"></button>
                                     </form>
                                 </div>
 
@@ -115,4 +139,13 @@ class Header extends Component {
         )
     }
 }
-export default Header;
+const mapDispatchToProps = (keyword) => {
+    return dispatch => {
+        return {
+            onSearch: (keyword) => {
+                dispatch(searchProduct(keyword));
+            }
+        }
+    }
+}
+export default connect(null,mapDispatchToProps)(Header);

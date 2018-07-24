@@ -13,7 +13,7 @@ class Slide extends Component {
                     </ol>
                     <div className="carousel-inner">
                     <div className="item active">
-                        <img src="image/slide/slide/slide3.jpg" alt="Los Angeles" style={{width:"100%"}}/>
+                        <img src="image/slide/slide/slide33.png" alt="Los Angeles" style={{width:"100%"}}/>
                     </div>
 
                     {/* <div className="item">
@@ -21,7 +21,7 @@ class Slide extends Component {
                     </div> */}
                     
                     <div className="item">
-                        <img src="image/slide/slide/slide2.jpg" alt="New york" style={{width:"100%"}}/>
+                        <img src="image/slide/slide/slide22.png" alt="New york" style={{width:"100%"}}/>
                     </div>
                     </div>
 

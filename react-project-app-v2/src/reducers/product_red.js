@@ -6,8 +6,7 @@ var initialState = [
 
 const products = (state= initialState, action ) => {
     var index = -1;
-    var {id,product} = action;
-    console.log("ac",action);    
+    var {id,product} = action;   
     switch(action.type){
         case Types.FETCH_PRODUCT:
             state = action.products;

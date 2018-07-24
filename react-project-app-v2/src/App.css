@@ -50,3 +50,14 @@
 .bg-green{
   background-color: #4ca811;
 }
+.card .rating {
+  color: #ffa000;
+}
+.rating {
+  list-style-type: none;
+}
+.price{
+  color: #ff0000;
+  font-weight: 700;
+  font-size: 14px;
+}

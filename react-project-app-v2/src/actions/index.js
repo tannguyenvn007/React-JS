@@ -81,3 +81,18 @@ export const updateProduct = (product) => {
         product
     }
 }
+
+export const searchProduct = (keyword) => {
+    return {
+        type: Types.SEARCH,
+        keyword
+    }
+}
+
+export const addCart = (product,quantity) => {
+    return {
+        type: Types.ADD_TO_CART,
+        product,
+        quantity
+    }
+}
