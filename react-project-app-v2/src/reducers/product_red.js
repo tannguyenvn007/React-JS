@@ -17,7 +17,7 @@ const products = (state= initialState, action ) => {
             return [...state];
         case Types.FETCH_PRODUCT_DETAILS:
             state = action.product;
-            console.log("detail",state);
+            
             return state;
         case Types.ADD_PRODUCT:
             state.push(action.product);

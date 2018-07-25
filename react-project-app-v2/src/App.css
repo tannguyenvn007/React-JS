@@ -61,3 +61,16 @@
   font-weight: 700;
   font-size: 14px;
 }
+.btn-rounded {
+  border-radius: 10em;
+}
+.deep-purple-skin .btn-primary {
+  background-color: #ac85f0;
+}
+.btn.btn-sm, .btn.wishlist {
+  font-size: .6rem;
+  padding: .5rem 1.6rem;
+}
+ .product-table td{
+  vertical-align: middle;
+ }

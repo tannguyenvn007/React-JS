@@ -1,20 +1,23 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
-import { FetchProductDetailsAPI } from "../actions";
+import { FetchProductDetailsAPI, addCart } from "../actions";
+import CartContainer from "../container/cart_container";
 const formatCurrency = require('format-currency')
 class ProductDetails extends Component {
 	componentDidMount() {
-        var { match } = this.props;
-        if (match) {
-            var id = match.params.id;
-            var category = match.url.substr(1, 2);
-            this.props.fetchProducts(id, category);
-        }
-    }
+		var { match } = this.props;
+		if (match) {
+			var id = match.params.id;
+			var category = match.url.substr(1, 2);
+			this.props.fetchProducts(id, category);
+		}
+	}
 	render() {
-		var {product} = this.props;
+		
+		var { product, cart } = this.props;
+		
 		var image = "";
-		if(product.image){
+		if (product.image) {
 			image = product.image;
 		}
 		let opts = { format: '%v %c', code: 'VND' }
@@ -40,8 +43,8 @@ class ProductDetails extends Component {
 
 								<div className="row">
 									<div className="col-sm-4">
-									
-										<img src={"image/product/product/" + image.substr(12)} alt="product"/>
+
+										<img src={"image/product/product/" + image.substr(12)} alt="product" />
 									</div>
 									<div className="col-sm-8">
 										<div className="single-item-body">
@@ -62,14 +65,16 @@ class ProductDetails extends Component {
 										<p>Quantity:</p>
 										<div className="single-item-options">
 											<select className="wc-select" name="color">
-												
+
 												<option value="1">1</option>
 												<option value="2">2</option>
 												<option value="3">3</option>
 												<option value="4">4</option>
 												<option value="5">5</option>
 											</select>
-											<a className="add-to-cart" href=""><i className="fa fa-shopping-cart"></i></a>
+											<a className="add-to-cart" onClick={() => this.onAddToCart(product)}>
+												<i className="fa fa-shopping-cart"></i>
+											</a>
 											<div className="clearfix"></div>
 										</div>
 									</div>
@@ -77,18 +82,8 @@ class ProductDetails extends Component {
 
 								<div className="space40">&nbsp;</div>
 								<div className="woocommerce-tabs">
-									<ul className="tabs">
-										<li><a href="#tab-description">Description</a></li>
-										<li><a href="#tab-reviews">Reviews (0)</a></li>
-									</ul>
+									<CartContainer />
 
-									<div className="panel" id="tab-description">
-										<p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.</p>
-										<p>Consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequaturuis autem vel eum iure reprehenderit qui in ea voluptate velit es quam nihil molestiae consequr, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? </p>
-									</div>
-									<div className="panel" id="tab-reviews">
-										<p>No Reviews</p>
-									</div>
 								</div>
 								<div className="space50">&nbsp;</div>
 								<div className="beta-products-list">
@@ -195,19 +190,26 @@ class ProductDetails extends Component {
 			</div>
 		)
 	}
-}
-const mapStateToProps = (state) => {
-	console.log("state",state);
-    return {
-        product: state.products
-    }
+	onAddToCart = (product) => {
+		this.props.onAddToCart(product);
+	}
 }
 
-const  mapDispatchToProps = (dispatch,props) => {
-    return {
-        fetchProducts: (id,category) => {
-            dispatch(FetchProductDetailsAPI(id,category));
-        }
-    }
+const mapStateToProps = (state) => {
+
+	return {
+		product: state.products,
+	}
 }
-export default connect(mapStateToProps,mapDispatchToProps)(ProductDetails);
+
+const mapDispatchToProps = (dispatch, props) => {
+	return {
+		fetchProducts: (id, category) => {
+			dispatch(FetchProductDetailsAPI(id, category));
+		},
+		onAddToCart: (product) => {
+			dispatch(addCart(product,1))
+		}
+	}
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
