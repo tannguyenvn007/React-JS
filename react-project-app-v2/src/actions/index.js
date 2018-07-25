@@ -1,5 +1,6 @@
 import * as Types from './../constants/action-type';
 import callApi from './../apiCaller'
+
 export const FetchProductsAPI = () => {
     return (dispatch) => {
         return callApi('https://www.mockapi.io/api/mocks/5b42e42263839a00144c0187/resources/5b42e44163839a00144c0189/data?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1YjIwOTU0ZWNhNzYyMDAwMTQ3YjI1YzAiLCJpYXQiOjE1MzE0NTQxNjQyNjYsImV4cCI6MTUzNDA0NjE2NDI2Nn0.qH6Y0XxXGFlJA_3FpnwbXC9E1COSV25AVHurmWpQ4Xw', 'GET', null).then(res => {
@@ -92,6 +93,25 @@ export const searchProduct = (keyword) => {
 export const addCart = (product,quantity) => {
     return {
         type: Types.ADD_TO_CART,
+        product,
+        quantity
+    }
+}
+export const changeMessage = (message) => {
+    return {
+        type: Types.CHANGE_MESSAGE,
+        message
+    }
+}
+export const deleteProductInCart = (product) => {
+    return {
+        type: Types.DELETE_PRODUCT_IN_CART,
+        product
+    }
+}
+export const updateProductInCart = (product, quantity) => {
+    return {
+        type: Types.UPDATE_PRODUCT_IN_CART,
         product,
         quantity
     }

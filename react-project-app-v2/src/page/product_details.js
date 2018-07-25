@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
-import { FetchProductDetailsAPI, addCart } from "../actions";
+import { FetchProductDetailsAPI, addCart, changeMessage } from "../actions";
 import CartContainer from "../container/cart_container";
+import Message from "../components/message";
+import * as message from './../constants/message';
 const formatCurrency = require('format-currency')
 class ProductDetails extends Component {
 	componentDidMount() {
@@ -14,7 +16,7 @@ class ProductDetails extends Component {
 	}
 	render() {
 		
-		var { product, cart } = this.props;
+		var { product } = this.props;
 		
 		var image = "";
 		if (product.image) {
@@ -82,6 +84,7 @@ class ProductDetails extends Component {
 
 								<div className="space40">&nbsp;</div>
 								<div className="woocommerce-tabs">
+									<Message/>
 									<CartContainer />
 
 								</div>
@@ -192,6 +195,7 @@ class ProductDetails extends Component {
 	}
 	onAddToCart = (product) => {
 		this.props.onAddToCart(product);
+		this.props.onChangeMessage(message.MSG_ADD_TO_CART_SUCCESS);
 	}
 }
 
@@ -209,6 +213,9 @@ const mapDispatchToProps = (dispatch, props) => {
 		},
 		onAddToCart: (product) => {
 			dispatch(addCart(product,1))
+		},
+		onChangeMessage : (message) => {
+			dispatch(changeMessage(message))
 		}
 	}
 }
