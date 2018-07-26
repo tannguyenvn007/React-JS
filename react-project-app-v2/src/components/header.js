@@ -34,8 +34,9 @@ class Header extends Component {
                             <div className="pull-right auto-width-right">
                                 <ul className="top-details menu-beta l-inline">
                                     <li><a href=""><i className="fa fa-user"></i>Tài khoản</a></li>
-                                    <li><a href="">Đăng kí</a></li>
-                                    <li><a href="">Đăng nhập</a></li>
+                                    <li><Link to="/register">Đăng kí</Link></li>
+                                    <li><Link to="/login">Đăng nhập</Link></li>
+                                    
                                 </ul>
                             </div>
                             <div className="clearfix"></div>

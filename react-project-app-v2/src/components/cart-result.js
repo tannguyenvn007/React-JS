@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-
+const formatCurrency = require('format-currency')
 class CartResult extends Component {
     render() {
         var { cart } = this.props;
+        let opts = { format: '%v %c', code: 'VND' }
         return (
             <tr>
                 <td colSpan="3"></td>
@@ -13,11 +14,11 @@ class CartResult extends Component {
                 </td>
                 <td>
                     <h4>
-                        <strong>{this.showTotalAmount(cart)}$</strong>
+                        <strong>{formatCurrency(this.showTotalAmount(cart),opts)}</strong>
                     </h4>
                 </td>
                 <td colSpan="3">
-                    <button type="button" className="btn btn-primary waves-effect waves-light">Complete purchase
+                    <button type="button" className="btn btn-primary waves-effect waves-light btn-bg-color">Complete purchase
                             <i className="fa fa-angle-right right"></i>
                     </button>
                 </td>

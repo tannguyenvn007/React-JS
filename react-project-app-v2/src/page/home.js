@@ -7,12 +7,13 @@ import { FetchProductsAPI, addCart } from './../actions/index'
 
 
 class Home extends Component {
-
+  
   componentDidMount() {
     this.props.fetchAllProducts();
+    
   }
   render() {
-
+    
     var { products, keyword } = this.props;
     if (keyword) {
       products = products.filter((pro) => {
@@ -53,7 +54,7 @@ class Home extends Component {
   }
   showProduct(products) {
     var result = null;
-    var {onAddToCart} = this.props;
+    
     if (products.length > 0) {
       result = products.map((product, index) => {
         return <ProductNew key={index} product={product} index={index}/>

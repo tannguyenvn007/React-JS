@@ -116,3 +116,16 @@ export const updateProductInCart = (product, quantity) => {
         quantity
     }
 }
+export const registerAPI = (user) => {
+    return dispatch => {
+        return callApi(`http://5b42e42263839a00144c0186.mockapi.io/users`, 'POST', user).then(res => {
+            dispatch(register(res.data));
+        })
+    }
+}
+export const register = (user) => {
+    return {
+        type: Types.REGISTER,
+        user
+    }
+}

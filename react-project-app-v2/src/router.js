@@ -7,6 +7,8 @@ import Contact from './page/contact';
 import Manage from './page/manage/manage';
 import ProductAction from './page/manage/productAction';
 import ProductDetails from './page/product_details';
+import Login from './page/login';
+import Register from './page/register';
 
 
 const routes = [
@@ -49,6 +51,16 @@ const routes = [
         path: '/:id/:id/edit',
         exact: false,
         main: ({history,match}) => <ProductAction history={history} match={match}/>
+    },
+    {
+        path: '/login',
+        exact: false,
+        main: () => <Login/>
+    },
+    {
+        path: '/register',
+        exact: false,
+        main: () => <Register/>
     },
     {
         path: '',

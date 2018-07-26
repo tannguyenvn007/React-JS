@@ -5,6 +5,8 @@ import Footer from './components/footer';
 import { Route, Switch } from 'react-router-dom';
 import routes from './router';  
 class App extends Component {
+  
+  
   render() {
     return (
       <div>

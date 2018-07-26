@@ -1,16 +1,20 @@
 import React, { Component } from "react";
 import * as message from './../constants/message';
+const formatCurrency = require('format-currency')
 class CartItem extends Component {
     
     render() {
         var {item} = this.props;
-        
-        
+        var image = "";
+		if (item.product.image) {
+			image = item.product.image;
+		}
+        let opts = { format: '%v %c', code: 'VND' }
         return (
             <tr>
                 <th scope="row">
                     <img 
-                        src={"image/product/product/"+item.product.image.substr(12)}
+                        src={"image/product/product/"+image.substr(12)}
                         alt={item.product.name} 
                         className="img-fluid z-depth-0"
                         width="100px"
@@ -22,29 +26,30 @@ class CartItem extends Component {
                         <strong>{item.product.name}</strong>
                     </h5>
                 </td>
-                <td>{item.product.price}$</td>
+                
+                <td>{formatCurrency(item.product.price, opts)}</td>
                 <td className="center-on-small-only">
                     <span className="qty">{item.quantity} </span>
                     <div className="btn-group radio-group" data-toggle="buttons">
                         <label
                             onClick={() => this.onUpdateQuantity(item.product,item.quantity - 1)}
-                            className="btn btn-sm btn-primary btn-rounded waves-effect waves-light"
+                            className="btn btn-sm btn-rounded waves-effect waves-light btn-bg-color"
                         >
                             <a>—</a>
                         </label>
                         <label
                             onClick={() => this.onUpdateQuantity(item.product,item.quantity + 1)}
-                            className="btn btn-sm btn-primary btn-rounded waves-effect waves-light"
+                            className="btn btn-sm btn-rounded waves-effect waves-light btn-bg-color"
                         >
                             <a>+</a>
                         </label>
                     </div>
                 </td>
-                <td>{this.showTotal(item.product.price,item.quantity)}$</td>
+                <td>{formatCurrency(this.showTotal(item.product.price,item.quantity),opts)}$</td>
                 <td>
                     <button
                         type="button"
-                        className="btn btn-sm btn-primary waves-effect waves-light"
+                        className="btn btn-sm btn-primary waves-effect waves-light btn-bg-color-red"
                         data-toggle="tooltip"
                         data-placement="top"
                         title=""

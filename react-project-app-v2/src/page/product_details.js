@@ -74,7 +74,7 @@ class ProductDetails extends Component {
 												<option value="4">4</option>
 												<option value="5">5</option>
 											</select>
-											<a className="add-to-cart" onClick={() => this.onAddToCart(product)}>
+											<a className="add-to-cart btn-bg-color" onClick={() => this.onAddToCart(product)}>
 												<i className="fa fa-shopping-cart"></i>
 											</a>
 											<div className="clearfix"></div>

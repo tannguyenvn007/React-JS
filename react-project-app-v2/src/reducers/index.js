@@ -4,11 +4,13 @@ import itemEditing from './product_item';
 import searchProduct from './search_pro';
 import cart from './cart';
 import message from './message';
+import user from './user';
 const appReducers = combineReducers ({
     products,
     itemEditing,
     searchProduct,
     cart,
-    message
+    message,
+    user
 });
 export default appReducers;
