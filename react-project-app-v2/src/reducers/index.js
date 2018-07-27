@@ -5,12 +5,14 @@ import searchProduct from './search_pro';
 import cart from './cart';
 import message from './message';
 import user from './user';
+import category from './category';
 const appReducers = combineReducers ({
     products,
     itemEditing,
     searchProduct,
     cart,
     message,
-    user
+    user,
+    category
 });
 export default appReducers;

@@ -129,3 +129,16 @@ export const register = (user) => {
         user
     }
 }
+export const fetchCategoryAPI = () => {
+    return dispatch => {
+        return callApi(`http://5b42e42263839a00144c0186.mockapi.io/Categories`, 'GET', null).then(res => {
+            dispatch(fetchCategory(res.data));
+        })
+    }
+}
+export const fetchCategory = (category) => {
+    return {
+        type: Types.FETCH_CATEGORY,
+        category
+    }
+}

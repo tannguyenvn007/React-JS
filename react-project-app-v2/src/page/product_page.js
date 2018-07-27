@@ -1,8 +1,15 @@
 import React,{ Component } from "react";
-
+import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import { fetchCategoryAPI } from "../actions";
 class Product extends Component {
+    componentDidMount() {
+        this.props.fetchAllCategory();
+        
+      }
     render(){
+        // var {category} = this.props;
+        // console.log(category);
         return (
             <div>
                 <div className="inner-header">
@@ -26,11 +33,7 @@ class Product extends Component {
                                 <div className="col-sm-3">
                                     <ul className="aside-menu">
                                         <li><a href="">Typography</a></li>
-                                        <li><a href="">Buttons</a></li>
-                                
-                                        <li className="is-active"><a href="">Custom callout box</a></li>
-                                        <li><a href="">Page section</a></li>
-                                        <li><a href="">Mini callout box</a></li>
+                                        
                     
                                     </ul>
                                 </div>
@@ -175,4 +178,16 @@ class Product extends Component {
         )
     }
 }
-export default Product;
+const mapStateToProps = (state) => {
+    return {
+        category: state.category
+    }
+}
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+      fetchAllCategory: () => {
+        dispatch(fetchCategoryAPI);
+      }
+    }
+  }
+export default connect(mapStateToProps,mapDispatchToProps)(Product);
