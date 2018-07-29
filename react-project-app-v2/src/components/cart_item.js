@@ -13,7 +13,7 @@ class CartItem extends Component {
     let opts = { format: '%v %c', code: 'VND' }
      
     return (
-      <tr>
+      <tr className="cart-item-middle">
         <th scope="row">
             <img 
                 src={"image/product/product/"+image.substr(12)}

@@ -13,9 +13,9 @@ class Cart extends Component {
             <table className = "table product-table">
             <thead>
             <tr>
-            < th > </th><th > Sản Phẩm</th> 
-            < th > Giá </th> <th > Số Lượng(Kg) </th>
-            <th > Tổng Cộng </th> <th> </th> </tr > </thead> 
+            < th > </th><th > Product</th> 
+            < th > Price </th> <th > Quantity(Kg) </th>
+            <th > Total </th> <th> </th> </tr > </thead> 
             <tbody> 
             {
                 children

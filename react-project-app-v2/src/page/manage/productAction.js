@@ -15,6 +15,7 @@ class ProductAction extends Component {
             txtDes: '',
             chkbStatus: '',
             category: 1,
+            txtRating:'',
             data: []
         }
     }
@@ -36,7 +37,8 @@ class ProductAction extends Component {
                 txtPrice: itemEditing.price,
                 txtDes: itemEditing.description,
                 chkbStatus: itemEditing.status,
-                category: itemEditing.CategoryId
+                category: itemEditing.CategoryId,
+                txtRating: itemEditing.rating
             });
         }
     }
@@ -51,7 +53,7 @@ class ProductAction extends Component {
     onSave = (e) => {
         e.preventDefault();
         var { history } = this.props;
-        var { id, txtName, txtPrice, txtImage, txtDes, chkbStatus, category } = this.state;
+        var { id, txtName, txtPrice, txtImage, txtDes, chkbStatus, category ,txtRating} = this.state;
         console.log("id",id);
         var product = {
             id: id,
@@ -60,7 +62,8 @@ class ProductAction extends Component {
             image: txtImage,
             price: txtPrice,
             description: txtDes,
-            status: chkbStatus
+            status: chkbStatus,
+            rating: txtRating
         }
         
         if (id) {
@@ -74,7 +77,7 @@ class ProductAction extends Component {
     }
     render() {
 
-        var { id, txtName, txtPrice, txtImage, txtDes, chkbStatus, category } = this.state;
+        var { id, txtName, txtPrice, txtImage, txtDes, chkbStatus, category,txtRating} = this.state;
         return (
             <div className="block-action">
                 <div className="container">
@@ -108,6 +111,13 @@ class ProductAction extends Component {
                                     <label className="col-sm-3 control-label">Giá:</label>
                                     <div className="col-sm-9">
                                         <input type="number" className="form-control" name="txtPrice" value={txtPrice} onChange={this.onChange} />
+                                    </div>
+
+                                </div>
+                                <div className="form-group">
+                                    <label className="col-sm-3 control-label">Danh gia:</label>
+                                    <div className="col-sm-9">
+                                        <input type="number" className="form-control" name="txtRating" value={txtRating} onChange={this.onChange} />
                                     </div>
 
                                 </div>

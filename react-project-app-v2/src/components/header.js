@@ -33,9 +33,9 @@ class Header extends Component {
                             </div>
                             <div className="pull-right auto-width-right">
                                 <ul className="top-details menu-beta l-inline">
-                                    <li><a href=""><i className="fa fa-user"></i>Tài khoản</a></li>
-                                    <li><Link to="/register">Đăng kí</Link></li>
-                                    <li><Link to="/login">Đăng nhập</Link></li>
+                                    <li><a href=""><i className="fa fa-user"></i>Account</a></li>
+                                    <li><Link to="/register">Sign up</Link></li>
+                                    <li><Link to="/login">Sign in</Link></li>
                                     
                                 </ul>
                             </div>
@@ -57,14 +57,14 @@ class Header extends Component {
                                             value={keyword}
                                             name="keyword" 
                                             onChange={this.onHandleChange}
-                                            placeholder="Nhập từ khóa..." />
+                                            placeholder="Enter keyword..." />
                                         <button onClick={this.onSearch} className="fa fa-search" type="button" id="searchsubmit"></button>
                                     </form>
                                 </div>
 
                                 <div className="beta-comp">
                                     <div className="cart">
-                                        <div className="beta-select"><i className="fa fa-shopping-cart"></i> Giỏ hàng (Trống) <i className="fa fa-chevron-down"></i></div>
+                                        <div className="beta-select"><i className="fa fa-shopping-cart"></i> Cart (Empty) <i className="fa fa-chevron-down"></i></div>
                                         <div className="beta-dropdown cart-body">
                                             <div className="cart-item">
                                                 <div className="media">

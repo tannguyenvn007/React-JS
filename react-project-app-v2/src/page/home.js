@@ -31,9 +31,9 @@ class Home extends Component {
               <div className="row">
                 <div className="col-sm-12">
                   <div className="beta-products-list">
-                    <h4>New Products</h4>
+                    <h4 className="product-title">Products</h4>
                     <div className="beta-products-details">
-                      <p className="pull-left">438 styles found</p>
+                      <p className="pull-left">{products.length} products found</p>
                       <div className="clearfix"></div>
                     </div>
                     <div className="row">

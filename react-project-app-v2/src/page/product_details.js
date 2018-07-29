@@ -56,9 +56,9 @@ class ProductDetails extends Component {
 									</div>
 									<div className="col-sm-8">
 										<div className="single-item-body">
-											<p className="single-item-title">{product.name}</p>
+											<p className="single-item-title">Product name: {product.name}</p>
 											<p className="single-item-price">
-												<span>{formatCurrency(product.price, opts)}</span>
+												Price: <span>{formatCurrency(product.price, opts)}</span>
 											</p>
 										</div>
 
@@ -66,7 +66,7 @@ class ProductDetails extends Component {
 										<div className="space20">&nbsp;</div>
 
 										<div className="single-item-desc">
-											<p>{product.description}</p>
+											<p>Description: {product.description}</p>
 										</div>
 										<div className="space20">&nbsp;</div>
 
