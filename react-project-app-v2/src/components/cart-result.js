@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 const formatCurrency = require('format-currency')
 class CartResult extends Component {
     render() {
@@ -6,7 +7,12 @@ class CartResult extends Component {
         let opts = { format: '%v %c', code: 'VND' }
         return (
             <tr>
-                <td colSpan="3"></td>
+                <td>
+                    <Link to="/" className="btn btn-primary waves-effect waves-light btn-bg-color">Back
+                            
+                    </Link>
+                </td>
+                <td colSpan="2"></td>
                 <td>
                     <h4>
                         <strong>Tổng Tiền</strong>

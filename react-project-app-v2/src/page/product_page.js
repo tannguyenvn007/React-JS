@@ -8,8 +8,8 @@ class Product extends Component {
         
       }
     render(){
-        // var {category} = this.props;
-        // console.log(category);
+        var {category} = this.props;
+        console.log(category);
         return (
             <div>
                 <div className="inner-header">

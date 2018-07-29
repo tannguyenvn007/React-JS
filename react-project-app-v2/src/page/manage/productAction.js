@@ -52,7 +52,9 @@ class ProductAction extends Component {
         e.preventDefault();
         var { history } = this.props;
         var { id, txtName, txtPrice, txtImage, txtDes, chkbStatus, category } = this.state;
+        console.log("id",id);
         var product = {
+            id: id,
             CategoryId: category,
             name: txtName,
             image: txtImage,
@@ -60,8 +62,10 @@ class ProductAction extends Component {
             description: txtDes,
             status: chkbStatus
         }
+        
         if (id) {
             this.props.onUpdateProduct(product,category);
+            history.goBack();
         } else {
             this.props.onAddProduct(category, product);
             history.goBack();

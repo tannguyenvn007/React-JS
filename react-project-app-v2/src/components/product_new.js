@@ -42,6 +42,7 @@ class ProductNew extends Component {
             </div>
         )
     }
+    
     showRatings(rating) {
         var result = [];
         for(var  i = 1; i <= rating;i++){

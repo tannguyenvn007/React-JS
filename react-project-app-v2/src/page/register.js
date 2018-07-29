@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { register, registerAPI } from "../actions";
+import { registerAPI } from "../actions";
 import {connect} from "react-redux";
 class Register extends Component {
   constructor(props) {
@@ -27,7 +27,7 @@ onChange = (e) => {
 }
 onSave = (e) => {
   e.preventDefault();
-  var {txtAddress,txtEmail,txtFullname,txtPassword,txtPhone,txtRePassword,check} = this.state;
+  var {txtAddress,txtEmail,txtFullname,txtPassword,txtPhone,txtRePassword} = this.state;
   var user = {
     name:txtFullname,
     address:txtAddress,

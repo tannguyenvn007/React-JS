@@ -37,10 +37,10 @@ export const FetchProductDetailsAPI = (id, category) => {
         })
     }
 }
-export const FetchProductDetails = (product) => {
+export const FetchProductDetails = (productDetails) => {
     return {
         type: Types.FETCH_PRODUCT_DETAILS,
-        product
+        productDetails
     }
 }
 export const AddProductAPI = (category, product) => {

@@ -6,6 +6,7 @@ import cart from './cart';
 import message from './message';
 import user from './user';
 import category from './category';
+import proDetails from './product_details'
 const appReducers = combineReducers ({
     products,
     itemEditing,
@@ -13,6 +14,7 @@ const appReducers = combineReducers ({
     cart,
     message,
     user,
-    category
+    category,
+    proDetails
 });
 export default appReducers;

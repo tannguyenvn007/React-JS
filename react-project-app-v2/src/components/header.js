@@ -45,7 +45,7 @@ class Header extends Component {
                     <div className="header-body">
                         <div className="container beta-relative">
                             <div className="pull-left">
-                                <a href="index.html" id="logo">
+                                <a href="/" id="logo">
                                 <img src="image/logo/logo.png" alt=""/></a>
                             </div>
                             <div className="pull-right beta-components space-left ov">

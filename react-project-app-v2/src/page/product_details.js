@@ -6,8 +6,15 @@ import Message from "../components/message";
 import * as message from './../constants/message';
 const formatCurrency = require('format-currency')
 class ProductDetails extends Component {
+	constructor(props){
+		super(props);
+		this.state = {
+			cart: false
+		}
+	}
 	componentDidMount() {
 		var { match } = this.props;
+		console.log('match',match)
 		if (match) {
 			var id = match.params.id;
 			var category = match.url.substr(1, 2);
@@ -15,9 +22,8 @@ class ProductDetails extends Component {
 		}
 	}
 	render() {
-		
+		var {cart} = this.state;
 		var { product } = this.props;
-		
 		var image = "";
 		if (product.image) {
 			image = product.image;
@@ -67,12 +73,7 @@ class ProductDetails extends Component {
 										<p>Quantity:</p>
 										<div className="single-item-options">
 											<select className="wc-select" name="color">
-
 												<option value="1">1</option>
-												<option value="2">2</option>
-												<option value="3">3</option>
-												<option value="4">4</option>
-												<option value="5">5</option>
 											</select>
 											<a className="add-to-cart btn-bg-color" onClick={() => this.onAddToCart(product)}>
 												<i className="fa fa-shopping-cart"></i>
@@ -84,8 +85,9 @@ class ProductDetails extends Component {
 
 								<div className="space40">&nbsp;</div>
 								<div className="woocommerce-tabs">
-									<Message/>
-									<CartContainer />
+								{cart === true ? (<div><Message/> <CartContainer /></div>) :''}
+									
+								
 
 								</div>
 								<div className="space50">&nbsp;</div>
@@ -194,15 +196,19 @@ class ProductDetails extends Component {
 		)
 	}
 	onAddToCart = (product) => {
+		this.setState({
+			cart: true,
+		})
 		this.props.onAddToCart(product);
 		this.props.onChangeMessage(message.MSG_ADD_TO_CART_SUCCESS);
+		
 	}
 }
 
 const mapStateToProps = (state) => {
 
 	return {
-		product: state.products,
+		product: state.proDetails,
 	}
 }
 

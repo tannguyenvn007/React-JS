@@ -3,7 +3,7 @@ import Slide from "./../components/slide"
 import ProductNew from "../components/product_new";
 import { connect } from 'react-redux';
 
-import { FetchProductsAPI, addCart } from './../actions/index'
+import { FetchProductsAPI } from './../actions/index'
 
 
 class Home extends Component {

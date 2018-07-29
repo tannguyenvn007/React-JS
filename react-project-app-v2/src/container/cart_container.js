@@ -5,7 +5,7 @@ import Cart from '../components/cart';
 import * as Message from './../constants/message';
 import CartItem from '../components/cart_item';
 import CartResult from '../components/cart-result';
-import { addCart, deleteProductInCart, changeMessage, updateProductInCart } from '../actions';
+import { deleteProductInCart, changeMessage, updateProductInCart } from '../actions';
 
 
 class CartContainer extends Component {
