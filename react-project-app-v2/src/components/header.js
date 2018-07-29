@@ -3,6 +3,8 @@ import {Link} from 'react-router-dom';
 
 import { connect } from 'react-redux';
 import { searchProduct } from "./../actions";
+import CartHeader from "./cart-header";
+import CartTotalHeader from "./cart-total-header";
 
 class Header extends Component {
     constructor(props){
@@ -21,6 +23,8 @@ class Header extends Component {
     }
     render () {
         var {keyword} = this.state;
+        var {cart} = this.props;
+        console.log('cart',cart);
         return (
                 <div id="header">
                     <div className="header-top bg-green">
@@ -64,50 +68,11 @@ class Header extends Component {
 
                                 <div className="beta-comp">
                                     <div className="cart">
-                                        <div className="beta-select"><i className="fa fa-shopping-cart"></i> Cart (Empty) <i className="fa fa-chevron-down"></i></div>
+                                        <div className="beta-select"><i className="fa fa-shopping-cart"></i>{cart.length > 0?`Cart(${cart.length})`:"Cart (Empty)"}  <i className="fa fa-chevron-down"></i></div>
                                         <div className="beta-dropdown cart-body">
-                                            <div className="cart-item">
-                                                <div className="media">
-                                                    <a className="pull-left" href=""><img src="assets/dest/images/products/cart/1.png" alt=""/></a>
-                                                    <div className="media-body">
-                                                        <span className="cart-item-title">Sample Woman Top</span>
-                                                        <span className="cart-item-options">Size: XS; Colar: Navy</span>
-                                                        <span className="cart-item-amount">1*<span>$49.50</span></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="cart-item">
-                                                <div className="media">
-                                                    <a className="pull-left" href=""><img src="assets/dest/images/products/cart/2.png" alt=""/></a>
-                                                    <div className="media-body">
-                                                        <span className="cart-item-title">Sample Woman Top</span>
-                                                        <span className="cart-item-options">Size: XS; Colar: Navy</span>
-                                                        <span className="cart-item-amount">1*<span>$49.50</span></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="cart-item">
-                                                <div className="media">
-                                                    <a className="pull-left" href=""><img src="assets/dest/images/products/cart/3.png" alt=""/></a>
-                                                    <div className="media-body">
-                                                        <span className="cart-item-title">Sample Woman Top</span>
-                                                        <span className="cart-item-options">Size: XS; Colar: Navy</span>
-                                                        <span className="cart-item-amount">1*<span>$49.50</span></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="cart-caption">
-                                                <div className="cart-total text-right">Tổng tiền: <span className="cart-total-value">$34.55</span></div>
-                                                <div className="clearfix"></div>
-
-                                                <div className="center">
-                                                    <div className="space10">&nbsp;</div>
-                                                    <a href="checkout.html" className="beta-btn primary text-center">Đặt hàng <i className="fa fa-chevron-right"></i></a>
-                                                </div>
-                                            </div>
+                                            {this.showCartHeader(cart)}
+                                            {this.showTotalAmount(cart)}
+                                            
                                         </div>
                                     </div> 
                                 </div>
@@ -139,6 +104,31 @@ class Header extends Component {
                 </div>
         )
     }
+    showCartHeader = (cart) =>{
+        var result = null;
+        if(cart.length > 0){
+            result = cart.map((item,index) => {
+                return <CartHeader key={index} item={item}/>
+            })
+        }
+        return result;
+    }
+    showTotalAmount = (cart) => {
+        var total = 0;
+        if (cart.length > 0) {
+            for (var i = 0; i < cart.length; i++) {
+                total += cart[i].product.price * cart[i].quantity;
+
+            }
+            return <CartTotalHeader total={total}/>
+        }
+        return total;
+    }
+}
+const mapStateToProps = (state) => {
+    return {
+        cart: state.cart
+    }
 }
 const mapDispatchToProps = (keyword) => {
     return dispatch => {
@@ -149,4 +139,4 @@ const mapDispatchToProps = (keyword) => {
         }
     }
 }
-export default connect(null,mapDispatchToProps)(Header);
+export default connect(mapStateToProps,mapDispatchToProps)(Header);
